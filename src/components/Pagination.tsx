@@ -1,4 +1,4 @@
-"use client";
+import React from "react";
 import Link from "next/link";
 import { buildQueryString } from "@/utils";
 import { MAX_COUNT } from "@/consts";

@@ -4,6 +4,8 @@
     - API定義、Next.jsの調査
 - Github Copilot
     - コードの補完
+- aider
+    - コードの生成
 
 # 工夫した点やこだわった点
 

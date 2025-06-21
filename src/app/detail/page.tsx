@@ -1,22 +1,7 @@
 import { ErrorBoundary } from "react-error-boundary";
 import Link from "next/link";
-import type { GitHubRepoItem } from "@/types";
 
-const fetchRepository = async (
-  owner: string,
-  name: string,
-): Promise<GitHubRepoItem> => {
-  const res = await fetch(`https://api.github.com/repos/${owner}/${name}`, {
-    method: "GET",
-    cache: "no-store",
-  });
-
-  if (!res.ok) {
-    throw new Error(`GitHub API error: ${res.status}`);
-  }
-
-  return res.json();
-};
+import { fetchRepository } from "@/api/github";
 
 type Props = {
   searchParams: { owner: string; name: string };
@@ -25,9 +10,10 @@ type Props = {
 const Stats = ({ name, count }: { name: string; count: number }) => (
   <div className="flex  flex-col items-center space-y-2">
     <div className="text-2xl ">{name}</div>
-    <div>{count}</div>
+    <div className="text-2xl ">{count}</div>
   </div>
 );
+
 export default async function Page({ searchParams }: Props) {
   const { owner, name } = await searchParams;
   if (!owner || !name) {
@@ -67,7 +53,7 @@ export default async function Page({ searchParams }: Props) {
           </div>
         </div>
         <div className="w-full">
-          <div className="flex flex-row justify-between">
+          <div className="flex flex-col space-y-8 sm:justify-between sm:flex-row ">
             <Stats name="Star数" count={repository.stargazers_count} />
             <Stats name="Watcher数" count={repository.watchers_count} />
             <Stats name="Fork数" count={repository.forks_count} />

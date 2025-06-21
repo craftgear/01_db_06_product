@@ -3,12 +3,22 @@
 import { useRef } from 'react';
 import { useRouter } from 'next/navigation'
 
-export default function SearchBar() {
+import { buildQueryString } from '@/utils';
+
+type Props = { query?: string, page: number, limit: number };
+
+export default function SearchBar({ query, page, limit }: Props) {
   const ref = useRef<HTMLInputElement>(null);
 
   const router = useRouter();
   const handleSearch = async (query: string) => {
-    router.push(`/?query=${encodeURIComponent(query)}`);
+    router.push(buildQueryString(query, page, limit));
+  }
+
+  const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      handleSubmit();
+    }
   }
 
   const handleSubmit = () => {
@@ -21,7 +31,7 @@ export default function SearchBar() {
     <div className="join">
       <div>
         <label className="input validator join-item w-md">
-          <input ref={ref} className="w-full" type="text" placeholder="リポジトリ名を入力してください" required />
+          <input onKeyUp={handleKeyPress} ref={ref} className="w-full" type="text" placeholder="リポジトリ名を入力してください" required defaultValue={query} />
         </label>
         <div className="validator-hint hidden">リポジトリ名が入力されていません</div>
       </div>

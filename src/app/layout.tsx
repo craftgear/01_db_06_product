@@ -30,10 +30,12 @@ export default function RootLayout({
       >
         <div className="navbar bg-base-100 shadow-sm">
           <Link href="/" className="btn btn-ghost text-xl">
-            タイトル
+            Githug Repository Search
           </Link>
         </div>
-        {children}
+        <div className="flex flex-col items-center justify-center p-8 pb-20 gap-16">
+          {children}
+        </div>
       </body>
     </html>
   );

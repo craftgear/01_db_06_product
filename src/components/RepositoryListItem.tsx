@@ -9,7 +9,6 @@ export default function RepositoryListItem({ item }: Props) {
   return (
     <Link
       href={`/detail/?owner=${item.owner.login}&name=${item.name}`}
-      target="_blank"
       rel="noopener noreferrer"
       className="no-underline"
     >

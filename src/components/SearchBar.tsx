@@ -1,8 +1,15 @@
-import { useRef } from 'react';
+'use client'
 
-export default function SearchBar({ handleSearch }: { handleSearch?: (query: string) => void }) {
+import { useRef } from 'react';
+import { useRouter } from 'next/navigation'
+
+export default function SearchBar() {
   const ref = useRef<HTMLInputElement>(null);
 
+  const router = useRouter();
+  const handleSearch = async (query: string) => {
+    router.push(`/?query=${encodeURIComponent(query)}`);
+  }
 
   const handleSubmit = () => {
     if (!ref.current) return;

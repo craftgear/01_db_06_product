@@ -1,12 +1,9 @@
-
-export const MAX_COUNT = 1000;
-
 export type GitHubRepoOwner = {
   login: string;
   id: number;
   avatar_url: string;
   html_url: string;
-}
+};
 
 export type GitHubRepoItem = {
   id: number;
@@ -35,13 +32,13 @@ export type GitHubRepoItem = {
     url: string | null;
   } | null;
   topics: string[];
-  visibility: 'public' | 'private';
+  visibility: "public" | "private";
   default_branch: string;
   score: number;
-}
+};
 
 export type GitHubRepoSearchResponse = {
   total_count: number;
   incomplete_results: boolean;
   items: GitHubRepoItem[];
-}
+};
